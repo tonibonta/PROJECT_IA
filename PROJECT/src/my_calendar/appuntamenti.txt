@@ -1,0 +1,5 @@
+In base a questo messaggio scrivimi nel formato (nome,2025-mm-ggTHH:MM:00,motivazione,tipo_azione) chi è che richiede l appuntamento e per cosa.
+con tipo_azione intendo aggiungi,modifica,cancella o info_appuntamenti
+
+
+

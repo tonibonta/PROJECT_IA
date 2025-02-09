@@ -1,0 +1,24 @@
+rispondi sempre e solo all ultima domanda\n
+BASANDOTI SU QUESTO TESTO 
+ASD Kairos Corsi offre una varietà di attività ginniche, sia non competitive che competitive, per diverse fasce d'età.
+
+Le attività **non competitive** includono:
+*   **Mini gym**, per bambini dai 4 anni, con orari il martedì e/o giovedì (16:00-17:00) e il mercoledì (16:45-17:45).
+*   **Base femminile**, per bambini dai 6 anni, con orari il lunedì/mercoledì/venerdì (17:00-18:00) e il martedì/giovedì (17:15-18:15).
+*  **Base maschile**, per bambini dai 6 anni, con orari il lunedì e/o giovedì (17:00-18:00).
+*  **Acro fun**, per bambini dagli 11 anni, con orari il martedì e/o giovedì (15:30-17:00).
+
+Le attività **competitive** comprendono:
+*   **Base +**, per bambini dai 6 anni, con orari il martedì e venerdì (17:00-18:30).
+*   **Avanzato artistica femminile**, con due livelli:
+    *   1° livello dai 6 anni (4 ore a settimana) il martedì e giovedì (17:00-19:00).
+    *   2° livello dagli 11 anni (5 ore e 30 minuti a settimana) il martedì e giovedì (15:00-17:00) più un terzo giorno.
+*   **Avanzato artistica maschile**, con due livelli:
+    *   1° livello dai 6 anni (4 ore a settimana) il lunedì e giovedì (17:00-19:00).
+    *    2° livello dagli 11 anni (5 ore e 30 minuti a settimana) il lunedì e mercoledì (15:00-17:00) più un terzo giorno.
+*   **Avanzato acrobatica**, con due livelli:
+    *    1° livello dai 6 anni (4 ore a settimana) il martedì e giovedì (17:00-18:30) più un terzo giorno.
+    *   2° livello dagli 11 anni (5 ore e 30 minuti totali) il lunedì e giovedì (15:00-17:00) e il sabato (11:00-12:30).
+*   **Pre-agonismo artistica e acrobatica**, dai 6 anni (7 ore e 30 minuti), con giorni e orari da concordare con i tecnici.
+*   **Agonismo artistica e acrobatica**, dagli 8 anni (11 ore), con giorni e orari da concordare con i tecnici.
+

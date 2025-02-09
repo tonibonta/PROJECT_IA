@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Centrale</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+            color: #333;
+            position:relative;
+        }
+        .chat-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 60%;
+            height: 90%;
+            margin-top: 70px;
+            background-color: #ffffff;
+            margin-bottom: 10px;
+
+            border-radius: 20px;
+            border-color: black;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            border:1px solid black
+        }
+        .messages-container {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        
+           
+        }
+        .message {
+            max-width: 80%;
+            
+            padding: 10px 15px;
+            border-radius: 15px;
+            background-color: #e0e0e0;
+            color: #333;
+            align-self: flex-start;
+        }
+        .message.user {
+            background-color: #03355e;
+            color: white;
+            align-self: flex-end;
+        }
+        .input-bar {
+            display: flex;
+            padding: 10px;
+            border-top: 1px solid #ccc;
+           
+        }
+        .input-bar input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            font-size: 1rem;
+            outline: none;
+            margin-left:50px;
+        }
+        .input-bar button {
+            margin-left: 10px;
+            margin-right: 50px;
+
+            padding: 10px 15px;
+            border: none;
+            border-radius: 20px;
+            background-color: #0078d7;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        .input-bar button:hover {
+            background-color: #005bb5;
+        }
+
+
+        /* Aggiunta della barra per i bottoni fuori dal container */
+       /* Bottoni fuori dalla chat-container, posizionati a sinistra e destra */
+       .left-button {
+            position: absolute;
+            top: 50%;
+            left: 5%; /* Distanza dalla sinistra */
+            transform: translateY(-50%);
+            padding: 10px 15px;
+            border: none;
+            border-radius: 20px;
+            background-color: #0078d7;
+            color: white;
+            
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .left-button:hover {
+            background-color: #005bb5;
+        }
+
+        .right-button {
+            position: absolute;
+            top: 50%;
+            right: 5%; /* Distanza dalla destra */
+            transform: translateY(-50%);
+            padding: 10px 15px;
+            border: none;
+            border-radius: 20px;
+            background-color: #0078d7;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .right-button:hover {
+            background-color: #005bb5;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="position: absolute;left: 43%;top:-30px;;font-size:50px;">NUOVA IA</h1>
+    <div class="button-bar">
+
+        <button onclick="config_gmail()" class="left-button" id="left-button">GMAIL</button>
+        <button onclick="config_calendar()"  class="right-button" id="right-button">GOOGLE CALENDAR</button>
+   
+    </div>
+    <div class="chat-container">
+        <div class="messages-container" id="messages-container">
+            {% for message in messages %}
+                <div class="message {% if message.user %}user{% endif %}">
+                    {{ message.text }}
+                </div>
+            {% endfor %}
+        </div>
+        <div class="input-bar">
+            <input id ="comando"type="text" placeholder="Scrivi un messaggio...">
+            <button onclick="sendMessage()">Invia</button>
+        </div>
+    </div>
+    <script>
+        // Funzione per inviare il messaggio al server Flask
+        function sendMessage() {
+            const userInput = document.getElementById('comando').value;
+            if (userInput) {
+                // Esegui una richiesta POST al server Flask con il messaggio
+                const messagesContainer = document.getElementById('messages-container');
+                    const newMessage = document.createElement('div');
+                    newMessage.classList.add('message', 'user');
+                    newMessage.textContent = userInput;
+                    messagesContainer.insertBefore(newMessage, messagesContainer.lastChild);
+                    document.getElementById('comando').value = ''; // Pulisci il campo di input
+                fetch('/send_message', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ message: userInput })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Aggiungi il nuovo messaggio all'inizio della chat
+                    const messagesContainer = document.getElementById('messages-container');
+                    const newMessage = document.createElement('div');
+                    newMessage.classList.add('message');
+                    newMessage.textContent = data.message;
+                    messagesContainer.insertBefore(newMessage, messagesContainer.lastChild);
+                    document.getElementById('comando').value = ''; // Pulisci il campo di input
+                });
+            }
+        }
+        function config_calendar() {
+            
+                // Esegui una richiesta POST al server Flask con il messaggio
+                fetch('/config_calendar', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ message: "" })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Aggiungi il nuovo messaggio all'inizio della chat
+                    const messagesContainer = document.getElementById('messages-container');
+                    const newMessage = document.createElement('div');
+                    newMessage.classList.add('message');
+                    newMessage.textContent = data.message;
+                    messagesContainer.insertBefore(newMessage, messagesContainer.lastChild);
+                    document.getElementById('comando').value = ''; // Pulisci il campo di input
+        });
+            }
+        
+
+        function config_gmail() {
+         
+                // Esegui una richiesta POST al server Flask con il messaggio
+                fetch('/config_gmail', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ message: "" })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Aggiungi il nuovo messaggio all'inizio della chat
+                    const messagesContainer = document.getElementById('messages-container');
+                    const newMessage = document.createElement('div');
+                    newMessage.classList.add('message');
+                    newMessage.textContent = data.message;
+                    messagesContainer.insertBefore(newMessage, messagesContainer.lastChild);
+                    document.getElementById('comando').value = ''; // Pulisci il campo di input
+                });
+            }
+        
+
+        // Aggiungi la funzionalità di invio premendo Enter
+        document.getElementById('comando').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+        
+    </script>
+</body>
+</html>
